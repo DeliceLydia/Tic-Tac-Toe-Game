@@ -64,10 +64,11 @@ end
 
 def validated_position(position, board)
   loop do
+    break if (1..9).include?(position) && !board[position - 1].is_a?(String)
+
     print 'Please enter valid number from 1 to 9: ' unless (1..9).include?(position)
     print "It's already taken. Please choose another position: " if board[position - 1].is_a?(String)
     position = gets.chomp.to_i
-    break if (1..9).include?(position) && !board[position - 1].is_a?(String)
   end
   position
 end
@@ -97,7 +98,6 @@ current_player = name1
 loop do
   print "#{current_player}: Which position do you want to take?: "
 
-  ## get the player input with validation
   position = gets.chomp.to_i
   position = validated_position(position, board)
 
