@@ -13,8 +13,9 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
   puts ''
 end
+
 def draw?(board)
- board.all? {|x| x.is_a?(String)}
+  board.all? { |x| x.is_a?(String) }
 end
 
 def win?(board)
@@ -29,28 +30,56 @@ def win?(board)
     [board[2], board[4], board[6]]
   ]
   combinations.any? do |comb|
-    comb.all? {|x| x == '●'} || comb.all? {|x| x == '■'} 
+    comb.all? { |x| x == '●' } || comb.all? { |x| x == '■' }
   end
 end
 
+def display_title
+  puts ''
+  puts '================================'
+  puts 'Welcome to Tic Tac Toe game!'
+  puts '================================'
+  puts 'This is the description for the game'
+end
+
+def validated_name(name)
+  loop do
+    break unless name.strip == ''
+
+    print 'Blank can not be used. Enter the correct name: '
+    name = gets.chomp
+  end
+  name
+end
+
+def players_name
+  print 'Enter the player 1 name: '
+  name1 = gets.chomp
+  name1 = validated_name(name1)
+  print 'Enter the player 2 name: '
+  name2 = gets.chomp
+  name2 = validated_name(name2)
+  [name1, name2]
+end
+
+def validated_position(position, board)
+  loop do
+    print 'Please enter valid number from 1 to 9: ' unless (1..9).include?(position)
+    print "It's already taken. Please choose another position: " if board[position - 1].is_a?(String)
+    position = gets.chomp.to_i
+    break if (1..9).include?(position) && !board[position - 1].is_a?(String)
+  end
+  position
+end
+
 # INTRO
-puts ''
-puts '================================'
-puts 'Welcome to Tic Tac Toe game!'
-puts '================================'
-puts 'This is the description for the game'
+display_title
 
 puts "If you want to start the game, enter any key, to quit the game, enter 'q'"
 ans = gets.chomp.downcase
 abort if ans == 'q'
 
-# get the player 1 name with validation
-print 'Enter the player 1 name: '
-name1 = gets.chomp
-
-# get the player 2 name with validation
-print 'Enter the player 2 name: '
-name2 = gets.chomp
+name1, name2 = players_name
 
 # print the names and symbols to each player
 puts "#{name1} will be using '●', #{name2} will be using '■'"
@@ -70,6 +99,7 @@ loop do
 
   ## get the player input with validation
   position = gets.chomp.to_i
+  position = validated_position(position, board)
 
   ## Update the board with player symbol based on the player's input
   board[position - 1] = current_player == name1 ? '●' : '■'
@@ -92,7 +122,6 @@ loop do
   display_board(board)
   ## switch current player
   current_player = current_player == name1 ? name2 : name1
-
 end
 
 # END
