@@ -2,8 +2,17 @@
 
 # --------------------------
 # METHODS
-# --------------------------
 
+# --------------------------
+def display_board(board)
+puts ''
+puts " #{board[0]} | #{board[1]} | #{board[2]} "
+puts '--- --- ---'
+puts " #{board[3]} | #{board[4]} | #{board[5]} "
+puts '--- --- ---'
+puts " #{board[6]} | #{board[7]} | #{board[8]} "
+puts ''
+end
 # --------------------------
 # INTRO
 # --------------------------
@@ -40,13 +49,7 @@ puts "#{name1} will be using '●', #{name2} will be using '■'"
 board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # display the latest board to player
-puts ''
-puts " #{board[0]} | #{board[1]} | #{board[2]} "
-puts '--- --- ---'
-puts " #{board[3]} | #{board[4]} | #{board[5]} "
-puts '--- --- ---'
-puts " #{board[6]} | #{board[7]} | #{board[8]} "
-puts ''
+display_board(board)
 
 # set the default current_player
 current_player = name1
@@ -63,21 +66,29 @@ loop do
   board[position - 1] = current_player == name1 ? '●' : '■'
 
   # BREAK REPEAT IF
-  # if win?
-  #   # do something
-  #   break
-  # elsif
-  #   # do something
-  # end
+  if win?
+    display_board(board)
+    puts "#{current_player} is a winner"
+    break
+  elsif draw?
+    display_board(board)
+    puts "The game is over!"
+    break
+  end
   # either player win or the board is filled with player's taking
   # display_board(board) to show result
   # If either player win, display winner elsif the borad is filled with, display 'draw the game!'
 
   ## display updated board
   ## switch current player
+  display_board(board)
+  current_player = current_player == name1 ? name2 : name1
   # END LOOP
 end
-
+puts "If you want to continue the game, enter any key, to quit the game, enter 'q'"
+# if player want to quit the game, quit (abort)
+ans = gets.chomp.downcase
+abort if ans == 'q'
 # --------------------------
 # END
 # --------------------------
