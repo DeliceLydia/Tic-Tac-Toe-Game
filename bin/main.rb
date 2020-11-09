@@ -13,6 +13,25 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
   puts ''
 end
+def draw?(board)
+ board.all? {|x| x.is_a?(String)}
+end
+
+def win?(board)
+  combinations = [
+    [board[0], board[1], board[2]],
+    [board[3], board[4], board[5]],
+    [board[6], board[7], board[8]],
+    [board[0], board[3], board[6]],
+    [board[1], board[4], board[7]],
+    [board[2], board[5], board[8]],
+    [board[0], board[4], board[8]],
+    [board[2], board[4], board[6]]
+  ]
+  combinations.any? do |comb|
+    comb.all? {|x| x == '●'} || comb.all? {|x| x == '■'} 
+  end
+end
 
 # INTRO
 puts ''
@@ -46,9 +65,6 @@ puts "#{name1} will be using '●', #{name2} will be using '■'"
 display_board(board)
 current_player = name1
 
-# count the times for mockup temporarily
-count = 0
-
 loop do
   print "#{current_player}: Which position do you want to take?: "
 
@@ -59,36 +75,24 @@ loop do
   board[position - 1] = current_player == name1 ? '●' : '■'
 
   # BREAK REPEAT IF : for the mile stone 3
-  # if win?
-  #   display_board(board)
-  #   puts 'Congratulations!'
-  #   puts "#{current_player} is the winner!"
-  #   puts ''
-  #   break
-  # elsif draw?
-  #   display_board(board)
-  #   puts 'Oops. The game is over!'
-  #   puts ''
-  #   break
-  # end
+  if win?(board)
+    display_board(board)
+    puts 'Congratulations!'
+    puts "#{current_player} is the winner!"
+    puts ''
+    break
+  elsif draw?(board)
+    display_board(board)
+    puts 'Oops. The game is over!'
+    puts ''
+    break
+  end
 
   ## display updated board
   display_board(board)
   ## switch current player
   current_player = current_player == name1 ? name2 : name1
 
-  # count the times for mockup temporarily
-  count += 1
-  # break depends on the count number temporarily
-  next unless count == 7
-
-  display_board(board)
-  puts '================================'
-  puts 'Congratulations!'
-  puts "#{current_player} is the winner!"
-  puts '================================'
-  puts ''
-  break
 end
 
 # END
