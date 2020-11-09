@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
-require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
+require_relative '../lib/board.rb'
 
-# METHODS
 def display_board(board)
   puts ''
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
@@ -56,61 +55,55 @@ def switched_player(current_player, player1, player2)
   current_player == player1 ? player2 : player1
 end
 
-# INTRO
-display_title
-
-puts "If you want to start the game, enter any key, to quit the game, enter 'q'"
-ans = gets.chomp.downcase
-abort if ans == 'q'
-
-name1, name2 = players_name
-
-# print the names and symbols to each player
-puts "#{name1} will be using '●', #{name2} will be using '■'"
-
-# For Mile Stone 3
-game_board = Board.new
-player1 = Player.new(name1, '●')
-player2 = Player.new(name2, '■')
-# >> create player instance with names
-# >> create Board instance
-
-# PLAYING
-
-# display the latest board to player
-display_board(game_board.board)
-current_player = player1
-
-loop do
-  print "#{current_player.name}: Which position do you want to take?: "
-
-  position = gets.chomp.to_i
-  position = validated_position(position, board)
-
-  ## Update the board with player symbol based on the player's input
-  board[position - 1] = current_player == name1 ? '●' : '■'
-
-  # BREAK REPEAT IF : for the mile stone 3
-  if board.win?
-    display_board(game_board.board)
-    puts 'Congratulations!'
-    puts "#{current_player.name} is the winner!"
-    puts ''
-    break
-  elsif board.draw?
-    display_board(game_board.board)
-    puts 'Oops. The game is over!'
-    puts ''
-    break
-  end
-
-  ## display updated board
-  display_board(game_board.board)
-  ## switch current player
-  current_player = switched_player(current_player, player1, player2)
+def player_answer
+  puts "If you want to continue the game, enter any key, to quit the game, enter 'q'"
+  ans = gets.chomp.downcase
+  ans
 end
 
-# END
-puts "If you want to continue the game, enter any key, to quit the game, enter 'q'"
-ans = gets.chomp.downcase
-abort if ans == 'q'
+def display_name_symbol(player1, player2)
+  puts "#{player1.name} will be using '#{player1.symbol}'"
+  puts "#{player2.name} will be using '#{player2.symbol}'"
+end
+
+loop do
+  display_title
+  abort if player_answer == 'q'
+
+  name1, name2 = players_name
+
+  game_board = Board.new
+  player1 = Player.new(name1, '●')
+  player2 = Player.new(name2, '■')
+
+  display_name_symbol(player1, player2)
+  display_board(game_board.board)
+  current_player = player1
+
+  loop do
+    print "#{current_player.name}: Which position do you want to take?: "
+
+    position = gets.chomp.to_i
+    position = validated_position(position, game_board.board)
+
+    game_board.update_board(current_player, position, player1, player2)
+
+    if game_board.win?
+      display_board(game_board.board)
+      puts 'Congratulations!'
+      puts "#{current_player.name} is the winner!"
+      puts ''
+      break
+    elsif game_board.draw?
+      display_board(game_board.board)
+      puts 'Oops. The game is over!'
+      puts ''
+      break
+    end
+
+    display_board(game_board.board)
+    current_player = switched_player(current_player, player1, player2)
+  end
+
+  break if player_answer == 'q'
+end
