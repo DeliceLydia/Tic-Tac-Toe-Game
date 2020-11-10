@@ -92,6 +92,7 @@ Feel free to check the [issues page](../../issues).
 - Twitter: [@IngabireLydia3](https://twitter.com/IngabireLydia)
 - Linkedin: [Delice Lydia](https://www.linkedin.com/in/delice-lydia)
 ​
+
 👤 **Yoko Saka**
 ​
 - GitHub: [@yocosaka](https://github.com/yocosaka)
