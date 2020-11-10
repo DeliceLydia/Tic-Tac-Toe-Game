@@ -1,6 +1,6 @@
 # Tic-Tac-Toe-Game
 
-![Top Page Screenshot](./tic-tac-toe-image.jpg)
+![Top Page Screenshot](./tic-tac-toe-image.png)
 ​
 ## About the Project
 ​
@@ -15,26 +15,24 @@ We built this project following some requirements:
 ​
 ​
 ## Table of Contents
-​
 * [About the Project](#about-the-project)
-  * [Built With](#built-with)
+* [Built With](#built-with)
 * [Live Demo](#live-demo)
 * [Getting Started](#getting-started)
 * [About Tic Tac Toe](#about-tic-tac-toe)
 * [How to Play](#how-to-play)
 * [Contributing](#contributing)
-* [Show your support](#show-your-support)
-* [License](#license)
 * [Authors](#authors)
+* [Acknowlegments](#acknowlegments)
+​* [Show your support](#show-your-support)
+* [License](#license)
 ​
-​
-### Built With
-​
+## Built With
 * [Ruby](https://www.ruby-lang.org/en/)
 
 ## Live Demo
 
-* [live demo](https://repl.it/@yocoono/Tic-Tac-Toe-Game#main.rb)
+[Live demo](https://repl.it/@yocoono/Tic-Tac-Toe-Game#main.rb)
 ​
 ​
 ## Getting Started
@@ -64,7 +62,6 @@ If all 9 squares are filled and neither player can take 3 grids, the game will b
 ​
 ​
 ## How to play
-​
 1. To start the game, input any key
 2. Enter the player's names
 3. Take a look at the board 
@@ -91,9 +88,9 @@ Feel free to check the [issues page](../../issues).
 ​
 👤 **Delice Lydia**
 ​
-Github: [@DeliceLydia](https://github.com/DeliceLydia)
-Twitter: [@IngabireLydia3](https://twitter.com/IngabireLydia)
-Linkedin: [Delice Lydia](https://www.linkedin.com/in/delice-lydia)
+- Github: [@DeliceLydia](https://github.com/DeliceLydia)
+- Twitter: [@IngabireLydia3](https://twitter.com/IngabireLydia)
+- Linkedin: [Delice Lydia](https://www.linkedin.com/in/delice-lydia)
 ​
 👤 **Yoko Saka**
 ​
