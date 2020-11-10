@@ -1,9 +1,7 @@
 #!/usr/bin/env ruby
+require_relative '../lib/player.rb'
+require_relative '../lib/board.rb'
 
-# VARIABLES
-board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-# METHODS
 def display_board(board)
   puts ''
   puts " #{board[0]} | #{board[1]} | #{board[2]} "
@@ -14,32 +12,26 @@ def display_board(board)
   puts ''
 end
 
-def draw?(board)
-  board.all? { |x| x.is_a?(String) }
-end
-
-def win?(board)
-  combinations = [
-    [board[0], board[1], board[2]],
-    [board[3], board[4], board[5]],
-    [board[6], board[7], board[8]],
-    [board[0], board[3], board[6]],
-    [board[1], board[4], board[7]],
-    [board[2], board[5], board[8]],
-    [board[0], board[4], board[8]],
-    [board[2], board[4], board[6]]
-  ]
-  combinations.any? do |comb|
-    comb.all? { |x| x == '●' } || comb.all? { |x| x == '■' }
-  end
-end
-
 def display_title
+  puts '
+  _______ _        _______           _______
+ |__   __(_)      |__   __|         |__   __|
+    | |   _  ___     | | __ _  ___     | | ___   ___
+    | |  | |/ __|    | |/ _` |/ __|    | |/ _ \ / _ \
+    | |  | | (__     | | (_| | (__     | | (_) |  __/
+    |_|  |_|\___|    |_|\__,_|\___|    |_|\___/ \___|
+  '
+end
+
+def display_instruction
+  display_title
   puts ''
-  puts '================================'
-  puts 'Welcome to Tic Tac Toe game!'
-  puts '================================'
-  puts 'This is the description for the game'
+  puts 'It is played on a 3x3 grid.'
+  puts 'Players take turns placing their Mark, ● or ■, on an open square in the grid.'
+  puts ''
+  puts 'The first player taking 3 grids vertically, horizontally or diagonally will be the winner.'
+  puts 'If all 9 squares are filled and neither player can take 3 grids, the game will be draw.'
+  puts ''
 end
 
 def validated_name(name)
@@ -73,58 +65,55 @@ def validated_position(position, board)
   position
 end
 
-# INTRO
-display_title
-
-puts "If you want to start the game, enter any key, to quit the game, enter 'q'"
-ans = gets.chomp.downcase
-abort if ans == 'q'
-
-name1, name2 = players_name
-
-# print the names and symbols to each player
-puts "#{name1} will be using '●', #{name2} will be using '■'"
-
-# For Mile Stone 3
-# >> create player instance with names
-# >> create Board instance
-
-# PLAYING
-
-# display the latest board to player
-display_board(board)
-current_player = name1
-
-loop do
-  print "#{current_player}: Which position do you want to take?: "
-
-  position = gets.chomp.to_i
-  position = validated_position(position, board)
-
-  ## Update the board with player symbol based on the player's input
-  board[position - 1] = current_player == name1 ? '●' : '■'
-
-  # BREAK REPEAT IF : for the mile stone 3
-  if win?(board)
-    display_board(board)
-    puts 'Congratulations!'
-    puts "#{current_player} is the winner!"
-    puts ''
-    break
-  elsif draw?(board)
-    display_board(board)
-    puts 'Oops. The game is over!'
-    puts ''
-    break
-  end
-
-  ## display updated board
-  display_board(board)
-  ## switch current player
-  current_player = current_player == name1 ? name2 : name1
+def player_answer
+  puts ">> If you want to continue the game, enter any key, to quit the game, enter 'q'"
+  ans = gets.chomp.downcase
+  ans
 end
 
-# END
-puts "If you want to continue the game, enter any key, to quit the game, enter 'q'"
-ans = gets.chomp.downcase
-abort if ans == 'q'
+def display_name_symbol(player1, player2)
+  puts "#{player1.name} will be using '#{player1.symbol}'"
+  puts "#{player2.name} will be using '#{player2.symbol}'"
+end
+
+loop do
+  display_instruction
+  abort if player_answer == 'q'
+
+  name1, name2 = players_name
+
+  game_board = Board.new
+  player1 = Player.new(name1, '●')
+  player2 = Player.new(name2, '■')
+
+  display_name_symbol(player1, player2)
+  display_board(game_board.board)
+  current_player = player1
+
+  loop do
+    print "#{current_player.symbol} #{current_player.name}: Which position do you want to take?: "
+
+    position = gets.chomp.to_i
+    position = validated_position(position, game_board.board)
+
+    game_board.update_board(current_player, position, player1, player2)
+
+    if game_board.win?
+      display_board(game_board.board)
+      puts 'Congratulations!'
+      puts "#{current_player.name} is the winner!"
+      puts ''
+      break
+    elsif game_board.draw?
+      display_board(game_board.board)
+      puts 'Oops. The game is over!'
+      puts ''
+      break
+    end
+
+    display_board(game_board.board)
+    current_player = player1.switched_player(current_player, player2)
+  end
+
+  break if player_answer == 'q'
+end
