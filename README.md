@@ -85,6 +85,13 @@ Feel free to check the [issues page](../../issues).
 ​
 ​
 ## Authors
+
+👤 **Yoko Saka**
+​
+- GitHub: [@yocosaka](https://github.com/yocosaka)
+- Twitter: [@yocosaka](https://twitter.com/yocosaka)
+- LinkedIn: [Yoko Saka](https://www.linkedin.com/in/yokosaka)
+
 ​
 👤 **Delice Lydia**
 ​
@@ -92,12 +99,6 @@ Feel free to check the [issues page](../../issues).
 - Twitter: [@IngabireLydia3](https://twitter.com/IngabireLydia)
 - Linkedin: [Delice Lydia](https://www.linkedin.com/in/delice-lydia)
 ​
-
-👤 **Yoko Saka**
-​
-- GitHub: [@yocosaka](https://github.com/yocosaka)
-- Twitter: [@yocosaka](https://twitter.com/yocosaka)
-- LinkedIn: [Yoko Saka](https://www.linkedin.com/in/yokosaka)
 
 ## Acknowlegments
 
