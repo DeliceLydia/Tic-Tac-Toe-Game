@@ -4,4 +4,8 @@ class Player
     @name = name
     @symbol = symbol
   end
+
+  def switched_player(current_player, opponent)
+    current_player == self ? opponent : self
+  end
 end

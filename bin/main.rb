@@ -13,11 +13,25 @@ def display_board(board)
 end
 
 def display_title
+  puts '
+  _______ _        _______           _______
+ |__   __(_)      |__   __|         |__   __|
+    | |   _  ___     | | __ _  ___     | | ___   ___
+    | |  | |/ __|    | |/ _` |/ __|    | |/ _ \ / _ \
+    | |  | | (__     | | (_| | (__     | | (_) |  __/
+    |_|  |_|\___|    |_|\__,_|\___|    |_|\___/ \___|
+  '
+end
+
+def display_instruction
+  display_title
   puts ''
-  puts '================================'
-  puts 'Welcome to Tic Tac Toe game!'
-  puts '================================'
-  puts 'This is the description for the game'
+  puts 'It is played on a 3x3 grid.'
+  puts 'Players take turns placing their Mark, ● or ■, on an open square in the grid.'
+  puts ''
+  puts 'The first player taking 3 grids vertically, horizontally or diagonally will be the winner.'
+  puts 'If all 9 squares are filled and neither player can take 3 grids, the game will be draw.'
+  puts ''
 end
 
 def validated_name(name)
@@ -51,12 +65,8 @@ def validated_position(position, board)
   position
 end
 
-def switched_player(current_player, player1, player2)
-  current_player == player1 ? player2 : player1
-end
-
 def player_answer
-  puts "If you want to continue the game, enter any key, to quit the game, enter 'q'"
+  puts ">> If you want to continue the game, enter any key, to quit the game, enter 'q'"
   ans = gets.chomp.downcase
   ans
 end
@@ -67,7 +77,7 @@ def display_name_symbol(player1, player2)
 end
 
 loop do
-  display_title
+  display_instruction
   abort if player_answer == 'q'
 
   name1, name2 = players_name
@@ -81,7 +91,7 @@ loop do
   current_player = player1
 
   loop do
-    print "#{current_player.name}: Which position do you want to take?: "
+    print "#{current_player.symbol} #{current_player.name}: Which position do you want to take?: "
 
     position = gets.chomp.to_i
     position = validated_position(position, game_board.board)
@@ -102,7 +112,7 @@ loop do
     end
 
     display_board(game_board.board)
-    current_player = switched_player(current_player, player1, player2)
+    current_player = player1.switched_player(current_player, player2)
   end
 
   break if player_answer == 'q'
