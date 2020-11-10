@@ -24,7 +24,7 @@ We built this project following some requirements:
 * [Contributing](#contributing)
 * [Authors](#authors)
 * [Acknowlegments](#acknowlegments)
-​* [Show your support](#show-your-support)
+* [Show your support](#show-your-support)
 * [License](#license)
 ​
 ## Built With
