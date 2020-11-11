@@ -1,16 +1,11 @@
+# frozen_string_literal: true
+
 class Board
   attr_accessor :board
 
   def initialize
     @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  end
-
-  def draw?
-    @board.all? { |x| x.is_a?(String) }
-  end
-
-  def win?
-    combinations = [
+    @combinations = [
       [@board[0], @board[1], @board[2]],
       [@board[3], @board[4], @board[5]],
       [@board[6], @board[7], @board[8]],
@@ -20,7 +15,14 @@ class Board
       [@board[0], @board[4], @board[8]],
       [@board[2], @board[4], @board[6]]
     ]
-    combinations.any? do |comb|
+  end
+
+  def draw?
+    @board.all? { |x| x.is_a?(String) }
+  end
+
+  def win?
+    @combinations.any? do |comb|
       comb.all? { |x| x == '●' } || comb.all? { |x| x == '■' }
     end
   end
