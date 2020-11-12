@@ -46,7 +46,7 @@ PLATFORMS
 
 DEPENDENCIES
   pry (~> 0.13.1)
-  rspec (~> 3.1)
+  rspec (~> 3.0)
   rubocop (~> 0.93.1)
 
 BUNDLED WITH

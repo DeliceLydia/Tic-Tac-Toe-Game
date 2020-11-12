@@ -9,5 +9,5 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 # To install gems on your local folder, run "bundle install" on your terminal
 
 gem 'pry', '~> 0.13.1'
-gem 'rspec', '~>3.1'
+gem 'rspec', '~>3.0'
 gem 'rubocop', '~>0.93.1'
