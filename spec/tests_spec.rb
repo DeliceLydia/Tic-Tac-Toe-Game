@@ -57,4 +57,16 @@ describe Board do
       expect(temp_board.win?).to be(true)
     end
   end
+
+  describe '#update_board' do
+    new_board = Board.new
+    let(:player1) { Player.new('Dave', '■') }
+    let(:player2) { Player.new('Joxy', '●') }
+    let(:current_player) { player1 }
+
+    it 'should update the board after taking a position' do
+      new_board.update_board(current_player, 1, player1, player2)
+      expect(new_board.board[0]).to eql('■')
+    end
+  end
 end
