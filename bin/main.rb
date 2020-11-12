@@ -12,7 +12,7 @@ def display_board(board)
   puts ''
 end
 
-def display_title
+def display_titleigin 
   puts '
   _______ _        _______           _______
  |__   __(_)      |__   __|         |__   __|
@@ -79,6 +79,7 @@ end
 loop do
   display_instruction
   abort if player_answer == 'q'
+
 
   name1, name2 = players_name
 
