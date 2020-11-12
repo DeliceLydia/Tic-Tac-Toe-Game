@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# rubocop:disable Mertics/BlockLength
 require_relative '../lib/player'
 require_relative '../lib/board'
 
@@ -70,3 +73,5 @@ describe Board do
     end
   end
 end
+
+# rubocop:enable Mertics/BlockLength
