@@ -26,34 +26,35 @@ describe Player do
 end
 
 describe Board do
-    let(:board_game) { Board.new() }
-    let(:combination) {
-        [
-          [1, 2, 3],[4, 5, 6],[7, 8, 9]
-          [1, 4, 7],[2, 5, 8],[3, 6, 9]
-          [1, 5, 9],[7, 5, 3]
-        ] 
-    }
-    describe "#initialize" do
+  let(:board_game) { Board.new }
+
+  describe '#initialize' do
     it 'create a new board' do
-        expect(board_game.board).to eql([1, 2, 3, 4, 5, 6, 7, 8, 9])
+      expect(board_game.board).to eql([1, 2, 3, 4, 5, 6, 7, 8, 9])
     end
   end
-    
-  describe "#draw" do
+
+  describe '#draw' do
     it 'should return false if all board elements are numeric' do
       expect(board_game.draw?).to be(false)
     end
 
     it 'should return true when all board elements are not numeric' do
-        board_game.board = ['●','■']
-        expect(board_game.draw?).to be(true)
+      temp_board = Board.new
+      temp_board.board = ['●', '■', '■', '●', '●', '■', '●', '●', '■']
+      expect(temp_board.draw?).to be(true)
     end
-end
+  end
 
-    describe "#win" do
-    it 'should return true if any element has a combination of one symbol' do
-        expect(combination.win?).to be(false)
+  describe '#win?' do
+    it 'should return false if no combination has all the same symbol' do
+      expect(board_game.win?).to be(false)
     end
-end
+
+    it 'should return true if any combination has all the same symbol' do
+      temp_board = Board.new
+      temp_board.board = ['■', '●', '■', '●', '●', '●', '■', '●', '■']
+      expect(temp_board.win?).to be(true)
+    end
+  end
 end
