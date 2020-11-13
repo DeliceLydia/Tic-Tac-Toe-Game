@@ -30,6 +30,9 @@ We built this project following some requirements:
 ## Built With
 * [Ruby](https://www.ruby-lang.org/en/)
 
+## Tested With
+* Rspec
+
 ## Live Demo
 
 [Live demo](https://repl.it/@yocoono/Tic-Tac-Toe-Game#main.rb)
@@ -99,7 +102,7 @@ Feel free to check the [issues page](../../issues).
 - Twitter: [@yocosaka](https://twitter.com/yocosaka)
 - LinkedIn: [Yoko Saka](https://www.linkedin.com/in/yokosaka)
 
-## Acknowlegments
+## Acknowledgments
 
 Special Thanks to the [Odin Project](https://www.theodinproject.com/courses/ruby-programming/lessons/tic-tac-toe)
 
