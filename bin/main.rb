@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-require_relative '../lib/player.rb'
-require_relative '../lib/board.rb'
+require_relative '../lib/player'
+require_relative '../lib/board'
 
 def display_board(board)
   puts ''
@@ -24,7 +24,6 @@ def display_title
 end
 
 def display_instruction
-  display_title
   puts ''
   puts 'It is played on a 3x3 grid.'
   puts 'Players take turns placing their Mark, ● or ■, on an open square in the grid.'
@@ -67,8 +66,7 @@ end
 
 def player_answer
   puts ">> If you want to continue the game, enter any key, to quit the game, enter 'q'"
-  ans = gets.chomp.downcase
-  ans
+  gets.chomp.downcase
 end
 
 def display_name_symbol(player1, player2)
